@@ -17,8 +17,15 @@ SECRET_KEY = "django-insecure-s+v5b$7z$x1*!fl&(j^n)swgj+2knxt1rs!jru-*pb+7&h5suy
 # SECURITY WARNING: don't run with debug turned on in production!
 DEBUG = True
 
-ALLOWED_HOSTS = []
+ALLOWED_HOSTS = [
+    "employee-profile-management.onrender.com",
+    "localhost",
+    "127.0.0.1",
+]
 
+CORS_ALLOWED_ORIGINS = [
+    "https://employee-profile-management.vercel.app",
+]
 
 # Application definition
 
