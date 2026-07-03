@@ -20,21 +20,28 @@ export default function Dashboard() {
   const [employeeId, setEmployeeId] = useState("");
 
 
-const handleDelete = async (id) => {
+const handleDelete = async () => {
+  if (!employeeId) {
+    alert("Please enter Employee ID");
+    return;
+  }
+
   try {
     await axios.delete(
-      `https://employee-profile-management.onrender.com/api/employees/delete/${id}/`
+      `https://employee-profile-management.onrender.com/api/employees/delete/${employeeId}/`
     );
 
     alert("Employee Deleted Successfully");
 
-    fetchEmployees(); // Refresh list
+    setShowDeleteModal(false);
+    setEmployeeId("");
+
+    fetchEmployees();
   } catch (error) {
     console.log(error.response?.data);
-    alert("Delete Failed");
+    alert("Employee Not Found");
   }
 };
-
   return (
     <div className="min-h-screen bg-gray-100 flex">
       {/* Sidebar */}
