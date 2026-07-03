@@ -4,7 +4,7 @@ import { FaInstagram } from "react-icons/fa";
 import axios from "axios";
 import { useEffect, useState } from "react";
 import bg from "./assets/back.jpeg";
-
+import { useParams } from "react-router-dom";
 export default function DigitalCard() {
   const [employee, setEmployee] = useState(null);
   const { id } = useParams();
