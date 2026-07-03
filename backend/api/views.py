@@ -102,9 +102,9 @@ class EmployeeUpdateView(APIView):
 
 class EmployeeDeleteView(APIView):
 
-    def delete(self, request, pk):
+    def delete(self, request, emp_id):
 
-        employee = get_object_or_404(Employee, pk=pk)
+        employee = get_object_or_404(Employee, emp_id=emp_id)
 
         if employee.qr_code:
             qr_file = os.path.join(settings.MEDIA_ROOT, str(employee.qr_code))
@@ -119,5 +119,5 @@ class EmployeeDeleteView(APIView):
 
         return Response(
             {"message": "Employee Deleted Successfully"},
-            status=204
+            status=status.HTTP_204_NO_CONTENT
         )
