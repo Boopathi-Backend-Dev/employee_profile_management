@@ -20,12 +20,7 @@ export default function Dashboard() {
   const [employeeId, setEmployeeId] = useState("");
 
 
-const handleDelete = async () => {
-  if (!employeeId) {
-    alert("Please enter Employee ID");
-    return;
-  }
-
+const handleDelete = async (id) => {
   try {
     await axios.delete(
       `https://employee-profile-management.onrender.com/api/employees/delete/${id}/`
@@ -33,18 +28,12 @@ const handleDelete = async () => {
 
     alert("Employee Deleted Successfully");
 
-    setShowDeleteModal(false);
-    setEmployeeId("");
-
-    // Refresh employee list if needed
-    // fetchEmployees();
-
+    fetchEmployees(); // Refresh list
   } catch (error) {
-    alert("Employee Not Found");
-    console.log(error);
+    console.log(error.response?.data);
+    alert("Delete Failed");
   }
 };
-
 
   return (
     <div className="min-h-screen bg-gray-100 flex">
@@ -86,7 +75,7 @@ const handleDelete = async () => {
           </button>
 
           <button
-            onClick={() => setShowDeleteModal(true)}
+             onClick={() => handleDelete(employee.id)}
             className="w-full flex items-center gap-3 px-6 py-3 hover:bg-gray-800"
           >
             <UserPlus size={20} />
