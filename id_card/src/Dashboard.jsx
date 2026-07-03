@@ -19,29 +19,28 @@ export default function Dashboard() {
   const [showDeleteModal, setShowDeleteModal] = useState(false);
   const [employeeId, setEmployeeId] = useState("");
 
+  const handleDelete = async () => {
+    if (!employeeId) {
+      alert("Please enter Employee ID");
+      return;
+    }
 
-const handleDelete = async () => {
-  if (!employeeId) {
-    alert("Please enter Employee ID");
-    return;
-  }
+    try {
+      await axios.delete(
+        `https://employee-profile-management.onrender.com/api/employees/delete/${employeeId}/`,
+      );
 
-  try {
-    await axios.delete(
-      `https://employee-profile-management.onrender.com/api/employees/delete/${employeeId}/`
-    );
+      alert("Employee Deleted Successfully");
 
-    alert("Employee Deleted Successfully");
+      setShowDeleteModal(false);
+      setEmployeeId("");
 
-    setShowDeleteModal(false);
-    setEmployeeId("");
-
-    fetchEmployees();
-  } catch (error) {
-    console.log(error.response?.data);
-    alert("Employee Not Found");
-  }
-};
+      fetchEmployees(); // Employee list refresh
+    } catch (error) {
+      console.log(error);
+      alert("Employee Not Found");
+    }
+  };
   return (
     <div className="min-h-screen bg-gray-100 flex">
       {/* Sidebar */}
@@ -82,7 +81,7 @@ const handleDelete = async () => {
           </button>
 
           <button
-             onClick={() => handleDelete(employee.id)}
+            onClick={() => setShowDeleteModal(true)}
             className="w-full flex items-center gap-3 px-6 py-3 hover:bg-gray-800"
           >
             <UserPlus size={20} />
@@ -199,45 +198,41 @@ const handleDelete = async () => {
       )}
 
       {showDeleteModal && (
-  <div className="fixed inset-0 bg-black/50 flex items-center justify-center z-50">
-    <div className="bg-white w-96 rounded-xl p-6 shadow-xl">
+        <div className="fixed inset-0 bg-black/50 flex items-center justify-center z-50">
+          <div className="bg-white w-96 rounded-xl p-6 shadow-xl">
+            <h2 className="text-xl font-bold mb-4 text-red-600">
+              Delete Employee
+            </h2>
 
-      <h2 className="text-xl font-bold mb-4 text-red-600">
-        Delete Employee
-      </h2>
+            <input
+              type="text"
+              placeholder="Enter Employee ID"
+              value={employeeId}
+              onChange={(e) => setEmployeeId(e.target.value)}
+              className="w-full border rounded-lg px-4 py-2 mb-5"
+            />
 
-      <input
-        type="text"
-        placeholder="Enter Employee ID"
-        value={employeeId}
-        onChange={(e) => setEmployeeId(e.target.value)}
-        className="w-full border rounded-lg px-4 py-2 mb-5"
-      />
+            <div className="flex justify-end gap-3">
+              <button
+                onClick={() => {
+                  setShowDeleteModal(false);
+                  setEmployeeId("");
+                }}
+                className="px-4 py-2 bg-gray-300 rounded-lg"
+              >
+                Cancel
+              </button>
 
-      <div className="flex justify-end gap-3">
-
-        <button
-          onClick={() => {
-            setShowDeleteModal(false);
-            setEmployeeId("");
-          }}
-          className="px-4 py-2 bg-gray-300 rounded-lg"
-        >
-          Cancel
-        </button>
-
-        <button
-          onClick={handleDelete}
-          className="px-4 py-2 bg-red-600 text-white rounded-lg hover:bg-red-700"
-        >
-          Delete
-        </button>
-
-      </div>
-
-    </div>
-  </div>
-)}
+              <button
+                onClick={handleDelete}
+                className="px-4 py-2 bg-red-600 text-white rounded-lg hover:bg-red-700"
+              >
+                Delete
+              </button>
+            </div>
+          </div>
+        </div>
+      )}
     </div>
   );
 }
