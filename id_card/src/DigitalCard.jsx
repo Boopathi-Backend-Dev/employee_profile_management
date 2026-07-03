@@ -19,7 +19,7 @@ export default function DigitalCard() {
     return <h1 className="text-center mt-20">Loading...</h1>;
   }
 
-  const BASE_URL = "http://127.0.0.1:8000";
+  const BASE_URL = "https://employee-profile-management.onrender.com";
   return (
     <div className="min-h-screen bg-gray-100 flex justify-center items-center py-10">
       <div className="relative w-full max-w-[466px] h-[920px] overflow-hidden shadow-2xl rounded-sm">

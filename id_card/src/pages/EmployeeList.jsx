@@ -12,7 +12,7 @@ export default function EmployeeList() {
   const getEmployees = async () => {
     try {
       const res = await axios.get(
-        "https://employee-profile-management.onrender.com/api/employees/list/"
+        "https://employee-profile-management.onrender.com/api/employees/list/",
       );
 
       setEmployees(res.data);
@@ -25,43 +25,30 @@ export default function EmployeeList() {
 
   if (loading) {
     return (
-      <div className="text-center mt-20 text-2xl font-bold">
-        Loading...
-      </div>
+      <div className="text-center mt-20 text-2xl font-bold">Loading...</div>
     );
   }
 
   return (
     <div className="min-h-screen bg-gray-100 p-10">
-
-      <h1 className="text-3xl font-bold text-center mb-10">
-        Employee List
-      </h1>
+      <h1 className="text-3xl font-bold text-center mb-10">Employee List</h1>
 
       <div className="grid md:grid-cols-3 gap-6">
-
         {employees.map((employee) => (
-
           <div
             key={employee.id}
             className="bg-white rounded-xl shadow-lg overflow-hidden"
           >
-
             <img
-              src={`http://127.0.0.1:8000${employee.profile}`}
+              src={`https://employee-profile-management.onrender.com${employee.profile}`}
               alt=""
               className="w-full h-60 object-cover"
             />
 
             <div className="p-5">
+              <h2 className="text-xl font-bold">{employee.name}</h2>
 
-              <h2 className="text-xl font-bold">
-                {employee.name}
-              </h2>
-
-              <p className="text-gray-500">
-                {employee.designation}
-              </p>
+              <p className="text-gray-500">{employee.designation}</p>
 
               <p className="mt-3">
                 <b>EMP ID :</b> {employee.emp_id}
@@ -84,27 +71,17 @@ export default function EmployeeList() {
               </p>
 
               <div className="mt-5">
-
-                <p className="font-semibold mb-2">
-                  QR Code
-                </p>
+                <p className="font-semibold mb-2">QR Code</p>
 
                 <img
-                  src={`http://127.0.0.1:8000${employee.qr_code}`}
-                  alt=""
-                  className="w-40 h-40 border"
+                  src={`https://employee-profile-management.onrender.com${employee.qr_code}`}
+                  alt="QR Code"
                 />
-
               </div>
-
             </div>
-
           </div>
-
         ))}
-
       </div>
-
     </div>
   );
 }
