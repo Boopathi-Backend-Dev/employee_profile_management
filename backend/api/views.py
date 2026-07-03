@@ -22,7 +22,7 @@ class EmployeeCreateView(APIView):
 
             employee = serializer.save()
 
-            qr_url = f"http://localhost:5173/employee/{employee.id}"
+            url = f"https://employee-profile-management.vercel.app/employee/{employee.id}"
 
             qr = qrcode.make(qr_url)
 
