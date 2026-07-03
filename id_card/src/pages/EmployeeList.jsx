@@ -12,7 +12,7 @@ export default function EmployeeList() {
   const getEmployees = async () => {
     try {
       const res = await axios.get(
-        "http://127.0.0.1:8000/api/employees/list/"
+        "https://employee-profile-management.onrender.com/api/employees/list/"
       );
 
       setEmployees(res.data);

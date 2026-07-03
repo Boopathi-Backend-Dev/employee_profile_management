@@ -28,7 +28,7 @@ const handleDelete = async () => {
 
   try {
     await axios.delete(
-      `http://127.0.0.1:8000/api/employees/delete/${employeeId}/`
+      `https://employee-profile-management.onrender.com/api/employees/delete/${id}/`
     );
 
     alert("Employee Deleted Successfully");

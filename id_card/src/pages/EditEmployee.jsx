@@ -7,7 +7,7 @@ export default function EditEmployee() {
 
      useEffect(() => {
     axios
-      .get(`http://127.0.0.1:8000/api/employees/${id}/`)
+      .get(`https://employee-profile-management.onrender.com/api/employees/${id}/`)
       .then((res) => {
         console.log(res.data);
       })
