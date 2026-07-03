@@ -3,11 +3,13 @@ import { useParams } from "react-router-dom";
 import axios from "axios";
 
 export default function EditEmployee() {
-   const { id } = useParams();
+  const { id } = useParams();
 
-     useEffect(() => {
+  useEffect(() => {
     axios
-      .get(`https://employee-profile-management.onrender.com/api/employees/${id}/`)
+      .get(
+        `https://employee-profile-management.onrender.com/api/employees/${id}/`,
+      )
       .then((res) => {
         console.log(res.data);
       })
@@ -16,8 +18,6 @@ export default function EditEmployee() {
       });
   }, [id]);
 
-
-  
   const [formData, setFormData] = useState({
     emp_id: "",
     name: "",
@@ -32,7 +32,9 @@ export default function EditEmployee() {
   // Fetch Employee
   useEffect(() => {
     axios
-      .get("http://127.0.0.1:8000/api/employees/1/")
+      .get(
+        `https://employee-profile-management.onrender.com/api/employees/${id}/`,
+      )
       .then((res) => {
         setFormData({
           ...res.data,
@@ -40,7 +42,7 @@ export default function EditEmployee() {
         });
       })
       .catch((err) => console.log(err));
-  }, []);
+  }, [id]);
 
   const handleChange = (e) => {
     const { name, value, files } = e.target;
@@ -77,13 +79,13 @@ export default function EditEmployee() {
 
     try {
       await axios.put(
-        "http://127.0.0.1:8000/api/employees/update/1/",
+        `https://employee-profile-management.onrender.com/api/employees/update/${id}/`,
         data,
         {
           headers: {
             "Content-Type": "multipart/form-data",
           },
-        }
+        },
       );
 
       alert("Employee Updated Successfully");
@@ -92,16 +94,13 @@ export default function EditEmployee() {
       alert("Update Failed");
     }
   };
-
   return (
     <div className="min-h-screen bg-gray-100 flex justify-center items-center p-6">
       <form
         onSubmit={handleSubmit}
         className="bg-white w-full max-w-xl rounded-xl shadow-lg p-6 space-y-4"
       >
-        <h2 className="text-2xl font-bold text-center">
-          Update Employee
-        </h2>
+        <h2 className="text-2xl font-bold text-center">Update Employee</h2>
 
         <input
           type="text"

@@ -7,18 +7,19 @@ import bg from "./assets/back.jpeg";
 
 export default function DigitalCard() {
   const [employee, setEmployee] = useState(null);
-
+  const { id } = useParams();
   useEffect(() => {
-    fetch("http://127.0.0.1:8000/api/employees/2/")
+    fetch(
+      `https://employee-profile-management.onrender.com/api/employees/${id}/`,
+    )
       .then((res) => res.json())
       .then((data) => setEmployee(data))
       .catch((err) => console.log(err));
-  }, []);
+  }, [id]);
 
   if (!employee) {
     return <h1 className="text-center mt-20">Loading...</h1>;
   }
-
   const BASE_URL = "https://employee-profile-management.onrender.com";
   return (
     <div className="min-h-screen bg-gray-100 flex justify-center items-center py-10">
