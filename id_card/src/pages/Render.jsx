@@ -4,6 +4,7 @@ import Dashboard from "../Dashboard";
 import EmployeeCreate from "./EmployeeCreate";
 import EmployeeList from "./EmployeeList";
 import EditEmployee from "./EditEmployee";
+import DigitalCard from "../DigitalCard";
 const Render = () => {
   return (
     <>
@@ -14,6 +15,7 @@ const Render = () => {
           <Route path="/employees" element={<EmployeeList />} />
           <Route path="/update-employee" element={<EditEmployee />} />
           <Route path="/edit/:id" element={<EditEmployee />} />
+          <Route path="/employee/:id" element={<DigitalCard />} />
         </Routes>
       </BrowserRouter>
     </>
